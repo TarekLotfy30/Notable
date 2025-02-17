@@ -1,14 +1,17 @@
 // da ely ha3ml feh el routing beta3 el screens
 
 import 'package:flutter/material.dart';
-import '../../features/splash/ui/screens/splash_screen.dart';
-import 'routes.dart';
+import '../../features/onboarding/ui/screen/onboarding_view.dart';
+import '../../features/splash/ui/screens/splash_view.dart';
+import 'app_routes_name.dart';
 
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case AppRoutes.splashScreen:
-        return _buildRoute(const SplashScreen());
+      case AppRoutes.splashView:
+        return _buildRoute(const SplashView());
+      case AppRoutes.onboardingView:
+        return _buildRoute(const OnBoardingView());
       default:
         return _buildRoute(_wrongRoute);
     }

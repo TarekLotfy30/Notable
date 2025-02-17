@@ -16,6 +16,11 @@ dependencies:
   flutter_native_splash: ^2.4.4
   flutter_svg: ^2.0.17
   animated_text_kit: ^4.2.3
+  flutter_screenutil: ^5.9.3
+  intl: ^0.20.2
+  smooth_page_indicator: ^1.2.0+3
+  bloc: ^9.0.0
+  flutter_bloc: ^9.0.0
 
 dev_dependencies:
   flutter_test:
@@ -31,6 +36,7 @@ flutter:
     - assets/
     - assets/images/
     - assets/svgs/
+    - assets/svgs/onboarding/
 
   fonts:
     - family: SfUiDisplay

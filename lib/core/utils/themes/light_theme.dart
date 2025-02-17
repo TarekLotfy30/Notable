@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:noteable/core/utils/colors/app_colors.dart';
-import 'package:noteable/core/utils/typography/app_fonts.dart';
+import '../colors/app_colors.dart';
+import '../typography/app_fonts.dart';
 
 ThemeData lightTheme = ThemeData(
   useMaterial3: true,
@@ -49,10 +49,10 @@ ThemeData lightTheme = ThemeData(
     prefixIconColor: AppColors.primaryColor,
     suffixIconColor: AppColors.primaryColor,
   ),
-  pageTransitionsTheme: PageTransitionsTheme(
+  pageTransitionsTheme: const PageTransitionsTheme(
     builders: {
-      TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.android: const CupertinoPageTransitionsBuilder(),
+      TargetPlatform.iOS: const CupertinoPageTransitionsBuilder(),
     },
   ),
 );

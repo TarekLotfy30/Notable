@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:noteable/core/utils/themes/dark_theme.dart';
 
 import 'core/routes/app_router.dart';
-import 'core/routes/routes.dart';
+import 'core/routes/app_routes_name.dart';
 import 'core/utils/themes/light_theme.dart';
 
 class NoteableApp extends StatelessWidget {
@@ -18,7 +18,7 @@ class NoteableApp extends StatelessWidget {
       darkTheme: darkTheme,
       themeMode: ThemeMode.light,
       onGenerateRoute: appRouter.generateRoute,
-      initialRoute: AppRoutes.splashScreen,
+      initialRoute: AppRoutes.splashView,
     );
   }
 }
