@@ -4,7 +4,10 @@ import 'package:noteable/core/utils/typography/app_fonts.dart';
 
 ThemeData lightTheme = ThemeData(
   useMaterial3: true,
-  colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
+  colorScheme: ColorScheme.fromSeed(
+    primary: AppColors.primaryColor,
+    seedColor: AppColors.primaryColor,
+  ),
   fontFamily: AppFonts.sfUiDisplay,
   brightness: Brightness.light,
   scaffoldBackgroundColor: AppColors.backgroundColor,
@@ -52,5 +55,4 @@ ThemeData lightTheme = ThemeData(
       TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
     },
   ),
-  
 );

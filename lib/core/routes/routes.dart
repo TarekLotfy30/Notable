@@ -4,6 +4,7 @@ class AppRoutes {
   AppRoutes._();
   // EL CASE DAH HWA ESM EL FILE ('/' represent home screen)
   static const String splashScreen = '/';
+  static const String onboardingScreen = '/onboardingScreen';
   static const String loginScreen = '/loginScreen';
   static const String signupScreen = '/signupScreen';
 }

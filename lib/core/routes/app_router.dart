@@ -1,14 +1,14 @@
 // da ely ha3ml feh el routing beta3 el screens
 
 import 'package:flutter/material.dart';
-import '../../features/splash_screen/ui/screens/splash_screen.dart';
+import '../../features/splash/ui/screens/splash_screen.dart';
 import 'routes.dart';
 
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.splashScreen:
-        return _buildRoute(SplashScreen());
+        return _buildRoute(const SplashScreen());
       default:
         return _buildRoute(_wrongRoute);
     }
