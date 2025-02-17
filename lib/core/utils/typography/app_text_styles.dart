@@ -1,57 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:noteable/core/utils/typography/app_font_sizes.dart';
+
+import 'font_weight_helper.dart';
 
 class AppTextStyles {
-  static TextStyle font40Regular = TextStyle(
-    fontSize: 40,
-    color: AppColors.whiteColor,
-    fontWeight: FontWeightHelper.regular,
-  );
-
-  static TextStyle font32Regular = TextStyle(
-    fontSize: 32,
-    color: AppColors.whiteColor,
-    fontWeight: FontWeightHelper.regular,
-  );
+  AppTextStyles._();
 
   static TextStyle font24Regular = TextStyle(
-    fontSize: 24,
-    color: AppColors.whiteColor,
+    fontSize: AppFontSizes.h1,
     fontWeight: FontWeightHelper.regular,
   );
 
   static TextStyle font20Regular = TextStyle(
-    fontSize: 20,
-    color: AppColors.whiteColor,
+    fontSize: AppFontSizes.h2,
     fontWeight: FontWeightHelper.regular,
   );
 
   static TextStyle font16Regular = TextStyle(
-    fontSize: 16,
-    color: AppColors.whiteColor,
+    fontSize: AppFontSizes.h3,
     fontWeight: FontWeightHelper.regular,
   );
 
   static TextStyle font14Regular = TextStyle(
-    fontSize: 14,
-    color: AppColors.whiteColor,
+    fontSize: AppFontSizes.h4,
     fontWeight: FontWeightHelper.regular,
   );
 
   static TextStyle font12Regular = TextStyle(
-    fontSize: 12,
-    color: AppColors.whiteColor,
+    fontSize: AppFontSizes.h5,
     fontWeight: FontWeightHelper.regular,
   );
 
   static TextStyle font10Regular = TextStyle(
-    fontSize: 10,
-    color: AppColors.whiteColor,
+    fontSize: AppFontSizes.h6,
     fontWeight: FontWeightHelper.regular,
   );
 
   static TextStyle font8Regular = TextStyle(
-    fontSize: 8,
-    color: AppColors.whiteColor,
+    fontSize: AppFontSizes.h7,
     fontWeight: FontWeightHelper.regular,
   );
 }
