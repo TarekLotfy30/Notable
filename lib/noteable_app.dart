@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:noteable/core/utils/themes/dark_theme.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/routes/app_router.dart';
 import 'core/routes/app_routes_name.dart';
+import 'core/utils/themes/dark_theme.dart';
 import 'core/utils/themes/light_theme.dart';
 
 class NoteableApp extends StatelessWidget {
-  const NoteableApp({super.key, required this.appRouter});
+  const NoteableApp({super.key});
 
-  final AppRouter appRouter;
+  // It's good practice to create a single instance of AppRouter
+  static final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      themeMode: ThemeMode.light,
-      onGenerateRoute: appRouter.generateRoute,
-      initialRoute: AppRoutes.splashView,
+    return ScreenUtilInit(
+      designSize: const Size(360, 780),
+      minTextAdapt: true,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.light,
+        onGenerateRoute: _appRouter.generateRoute,
+        initialRoute: AppRoutes.splash,
+      ),
     );
   }
 }

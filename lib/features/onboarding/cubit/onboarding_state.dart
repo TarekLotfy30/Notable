@@ -5,4 +5,4 @@ abstract class OnboardingState {}
 
 class OnboardingInitial extends OnboardingState {}
 
-class OnboardingChangePage extends OnboardingState {}
+class ChangePage extends OnboardingState {}

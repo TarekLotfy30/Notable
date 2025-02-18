@@ -17,8 +17,11 @@ SizedBox horizontalSpacing(double width) => SizedBox(width: width.w);
 
 /// Shows a SnackBar with the provided [message] and optional [action].
 Future<void> showSnackBar(
-    BuildContext context, String message, Color backgroundColor,
-    {String? action}) async {
+  BuildContext context,
+  String message,
+  Color backgroundColor, {
+  String? action,
+}) async {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(

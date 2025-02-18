@@ -1,4 +1,4 @@
-import '../../../../core/utils/images/images.dart';
+import '../../../../core/utils/images/app_images.dart';
 
 class Onboarding {
   Onboarding({

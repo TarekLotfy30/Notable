@@ -1,19 +1,29 @@
-// da ely ha3ml feh el routing beta3 el screens
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../features/auth/ui/login_view.dart';
+import '../../features/onboarding/cubit/onboarding_cubit.dart';
 import '../../features/onboarding/ui/screen/onboarding_view.dart';
 import '../../features/splash/ui/screens/splash_view.dart';
 import 'app_routes_name.dart';
 
 class AppRouter {
-  Route generateRoute(RouteSettings settings) {
+  Route<dynamic> generateRoute(RouteSettings settings) {
+    debugPrint('⚡ Navigating to: ${settings.name}');
     switch (settings.name) {
-      case AppRoutes.splashView:
+      case AppRoutes.splash:
         return _buildRoute(const SplashView());
-      case AppRoutes.onboardingView:
-        return _buildRoute(const OnBoardingView());
+      case AppRoutes.onboarding:
+        return _buildRoute(
+          BlocProvider(
+            create: (context) => OnboardingCubit(),
+            child: const OnboardingView(),
+          ),
+        );
+      case AppRoutes.login:
+        return _buildRoute(const LoginView());
       default:
-        return _buildRoute(_wrongRoute);
+        return _buildRoute(_wrongRoute());
     }
   }
 
@@ -40,15 +50,18 @@ class AppRouter {
   //   );
   // }
 
-  final _wrongRoute = Scaffold(
-    appBar: AppBar(
-      title: const Text(
-        'Wrong Route',
+  Widget _wrongRoute() {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Wrong Route'),
       ),
-    ),
-  );
+      body: const Center(
+        child: Text('404 - Page not found'),
+      ),
+    );
+  }
 
-  MaterialPageRoute _buildRoute(Widget child) {
+  MaterialPageRoute<dynamic> _buildRoute(Widget child) {
     return MaterialPageRoute(builder: (context) => child);
   }
 }

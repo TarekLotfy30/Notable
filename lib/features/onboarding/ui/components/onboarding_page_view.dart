@@ -1,29 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../cubit/onboarding_cubit.dart';
-import '../../data/model/onboarding_model.dart';
-import 'onboarding_custom_item.dart';
+part of '../screen/onboarding_view.dart';
 
-class OnboardingPageView extends StatelessWidget {
-  const OnboardingPageView({super.key});
+class _OnboardingPageView extends StatelessWidget {
+  const _OnboardingPageView();
 
   @override
   Widget build(BuildContext context) {
     return PageView.builder(
-      itemBuilder: (context, index) => OnboardingCustomItem(
+      itemBuilder: (context, index) => _OnboardingCustomItem(
         onboarding: onboardingList[index],
       ),
       controller: context.read<OnboardingCubit>().boardController,
       itemCount: onboardingList.length,
       physics: const BouncingScrollPhysics(),
-      onPageChanged: (value) {
-        context.read<OnboardingCubit>().onPageChanged(value);
-        if (value == onboardingList.length - 1) {
-          context.read<OnboardingCubit>().isLast = true;
-        } else {
-          context.read<OnboardingCubit>().isLast = false;
-        }
+      onPageChanged: (index) {
+        context.read<OnboardingCubit>().onPageChanged(index);
       },
     );
   }

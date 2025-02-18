@@ -1,58 +1,50 @@
 import 'package:flutter/material.dart';
 import '../colors/app_colors.dart';
 import '../typography/app_fonts.dart';
+import '../typography/app_text_styles.dart';
+import '../typography/font_weight_helper.dart';
 
 ThemeData lightTheme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
     primary: AppColors.primaryColor,
     seedColor: AppColors.primaryColor,
+    brightness: Brightness.light,
+    onSurface: AppColors.black,
   ),
   fontFamily: AppFonts.sfUiDisplay,
-  brightness: Brightness.light,
   scaffoldBackgroundColor: AppColors.backgroundColor,
-  floatingActionButtonTheme: const FloatingActionButtonThemeData(
-    backgroundColor: AppColors.primaryColor,
-    elevation: 0,
-    shape: CircleBorder(),
-  ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 14,
+        vertical: 16,
+      ),
       backgroundColor: AppColors.primaryColor,
+      foregroundColor: Colors.white, // This controls the text color
       elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide.none,
+      ),
+      minimumSize: const Size(double.maxFinite, 52),
+      textStyle: AppTextStyles.textStyle16.copyWith(
+        fontWeight: FontWeightHelper.medium,
+      ),
     ),
   ),
-  inputDecorationTheme: InputDecorationTheme(
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-    ),
-    enabledBorder: const OutlineInputBorder(
-      borderSide: BorderSide(
-        width: 0.85,
+  textButtonTheme: TextButtonThemeData(
+    style: TextButton.styleFrom(
+      foregroundColor: Colors.black,
+      textStyle: AppTextStyles.textStyle14.copyWith(
+        fontWeight: FontWeightHelper.medium,
       ),
     ),
-    focusedBorder: const OutlineInputBorder(
-      borderSide: BorderSide(
-        color: AppColors.primaryColor,
-        width: 1,
-      ),
-    ),
-    labelStyle: const TextStyle(
-      fontSize: 13,
-      fontFamily: 'Lato',
-    ),
-    floatingLabelStyle: const TextStyle(
-      color: AppColors.primaryColor,
-      fontSize: 13,
-      fontFamily: 'Lato',
-    ),
-    prefixIconColor: AppColors.primaryColor,
-    suffixIconColor: AppColors.primaryColor,
   ),
   pageTransitionsTheme: const PageTransitionsTheme(
     builders: {
-      TargetPlatform.android: const CupertinoPageTransitionsBuilder(),
-      TargetPlatform.iOS: const CupertinoPageTransitionsBuilder(),
+      TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
     },
   ),
 );
