@@ -6,6 +6,11 @@ import 'font_weight_helper.dart';
 class AppTextStyles {
   AppTextStyles._();
 
+    static TextStyle textStyle40 = const TextStyle(
+    fontSize: 40,
+    fontWeight: FontWeightHelper.regular,
+  );
+
   static TextStyle textStyle32 = const TextStyle(
     fontSize: 32,
     fontWeight: FontWeightHelper.bold,
