@@ -22,7 +22,7 @@ class LoginView extends StatelessWidget {
                   unselectedLabelColor: AppColors.black,
                   labelStyle: AppTextStyles.textStyle16,
                   unselectedLabelStyle: AppTextStyles.textStyle16,
-                   indicator: ,
+                  // indicator: ,
                   tabs: const [
                     Tab(
                       text: 'Login',
@@ -39,9 +39,9 @@ class LoginView extends StatelessWidget {
                     ),
                   ],
                 ),
-                Expanded(
+                const Expanded(
                   child: TabBarView(
-                    children: const [
+                    children: [
                       Center(
                         child: Text('Login'),
                       ),
