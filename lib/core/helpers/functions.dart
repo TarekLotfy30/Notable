@@ -8,10 +8,10 @@ import '../utils/colors/app_colors.dart';
 import '../utils/typography/app_text_styles.dart';
 
 /// Returns a vertical spacing box with [height].
-SizedBox verticalSpacing(double height) => SizedBox(height: height.h);
+SizedBox verticalSpacing(double height) => SizedBox(height: height);
 
 /// Returns a horizontal spacing box with [width].
-SizedBox horizontalSpacing(double width) => SizedBox(width: width.w);
+SizedBox horizontalSpacing(double width) => SizedBox(width: width);
 
 /// Shows a date picker dialog and returns the selected date.
 
@@ -47,8 +47,7 @@ Future<void> showSnackBar(
       action: action != null
           ? SnackBarAction(
               label: action,
-              onPressed: () =>
-                  ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+              onPressed: () => ScaffoldMessenger.of(context).hideCurrentSnackBar(),
             )
           : null,
     ),
@@ -83,8 +82,7 @@ Future<DateTime?> datePicker({
       //2024-03-03 => api
       //3/3/2024 => ui
       if (value != null) {
-        textEditingController?.text =
-            convertUIDateToAPIFormat(DateFormat.yMd().format(value));
+        textEditingController?.text = convertUIDateToAPIFormat(DateFormat.yMd().format(value));
       }
       return value;
     },
@@ -109,16 +107,14 @@ String convertUIDateToAPIFormat(String uiDate) {
 
 Future<void> showGenericDialog(
   BuildContext context, {
-  required Widget Function(BuildContext, Animation<double>, Animation<double>)
-      pageBuilder,
+  required Widget Function(BuildContext, Animation<double>, Animation<double>) pageBuilder,
 }) {
   return showGeneralDialog(
     context: context,
     transitionDuration: const Duration(milliseconds: 500),
     pageBuilder: (ctx, anim1, anim2) => pageBuilder(ctx, anim1, anim2),
     transitionBuilder: (ctx, anim1, anim2, child) => BackdropFilter(
-      filter:
-          ImageFilter.blur(sigmaX: 3 * anim1.value, sigmaY: 3 * anim1.value),
+      filter: ImageFilter.blur(sigmaX: 3 * anim1.value, sigmaY: 3 * anim1.value),
       child: FadeTransition(
         opacity: anim1,
         child: child,

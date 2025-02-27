@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../features/auth/ui/login_view.dart';
+import '../../features/auth/ui/screen/auth_view.dart';
 import '../../features/onboarding/cubit/onboarding_cubit.dart';
 import '../../features/onboarding/ui/screen/onboarding_view.dart';
 import '../../features/splash/ui/screens/splash_view.dart';
@@ -21,7 +21,7 @@ class AppRouter {
           ),
         );
       case AppRoutes.login:
-        return _buildRoute(const LoginView());
+        return _buildRoute(const AuthView());
       default:
         return _buildRoute(_wrongRoute());
     }

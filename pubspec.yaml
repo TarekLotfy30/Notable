@@ -36,6 +36,7 @@ flutter:
     - assets/
     - assets/images/
     - assets/images/onboarding/
+    - assets/images/auth/
 
   fonts:
     - family: SfUiDisplay

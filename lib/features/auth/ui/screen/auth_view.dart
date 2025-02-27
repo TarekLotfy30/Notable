@@ -1,33 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/utils/colors/app_colors.dart';
-import '../../../core/utils/typography/app_text_styles.dart';
+import '../../cubit/login_cubit.dart';
+import 'login_view.dart';
+import 'register_view.dart';
+import 'social_media_view.dart';
 
-class LoginView extends StatelessWidget {
-  const LoginView({super.key});
+class AuthView extends StatelessWidget {
+  const AuthView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: DefaultTabController(
           length: 3,
-          initialIndex: 1,
+          initialIndex: 0,
           child: Scaffold(
             body: Column(
               children: [
-                TabBar(
-                  indicatorColor: AppColors.primaryColor,
-                  labelColor: AppColors.primaryColor,
-                  unselectedLabelColor: AppColors.black,
-                  labelStyle: AppTextStyles.textStyle16,
-                  unselectedLabelStyle: AppTextStyles.textStyle16,
-                  // indicator: ,
-                  tabs: const [
+                const TabBar(
+                  tabs: [
                     Tab(
                       text: 'Login',
                       icon: Icon(Icons.login),
-
                     ),
                     Tab(
                       text: 'Register',
@@ -39,18 +35,15 @@ class LoginView extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Expanded(
+                Expanded(
                   child: TabBarView(
                     children: [
-                      Center(
-                        child: Text('Login'),
+                      BlocProvider(
+                        create: (context) => LoginCubit(),
+                        child: const LoginView(),
                       ),
-                      Center(
-                        child: Text('Register'),
-                      ),
-                      Center(
-                        child: Text('Forgot Password'),
-                      ),
+                      const RegisterView(),
+                      const SocialMediaView(),
                     ],
                   ),
                 ),

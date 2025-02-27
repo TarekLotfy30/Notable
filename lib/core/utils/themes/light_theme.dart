@@ -20,6 +20,7 @@ ThemeData lightTheme = ThemeData(
         horizontal: 14,
         vertical: 16,
       ),
+      
       backgroundColor: AppColors.primaryColor,
       foregroundColor: Colors.white, // This controls the text color
       elevation: 0,
@@ -28,7 +29,7 @@ ThemeData lightTheme = ThemeData(
         side: BorderSide.none,
       ),
       minimumSize: const Size(double.maxFinite, 52),
-      textStyle: AppTextStyles.textStyle16.copyWith(
+      textStyle: AppTextStyles.textStyle18.copyWith(
         fontWeight: FontWeightHelper.medium,
       ),
     ),
@@ -39,6 +40,55 @@ ThemeData lightTheme = ThemeData(
       textStyle: AppTextStyles.textStyle14.copyWith(
         fontWeight: FontWeightHelper.medium,
       ),
+    ),
+  ),
+  tabBarTheme: TabBarTheme(
+    indicatorColor: AppColors.primaryColor,
+    labelColor: AppColors.primaryColor,
+    unselectedLabelColor: AppColors.black,
+    labelStyle: AppTextStyles.textStyle16,
+    unselectedLabelStyle: AppTextStyles.textStyle16,
+    indicatorSize: TabBarIndicatorSize.label,
+    labelPadding: const EdgeInsets.all(8),
+  ),
+  inputDecorationTheme: InputDecorationTheme(
+    isDense: true,
+    filled: true,
+    fillColor: AppColors.whiteColor,
+    contentPadding: const EdgeInsets.symmetric(
+      horizontal: 20,
+      vertical: 18,
+    ),
+    hintStyle: AppTextStyles.textStyle16.copyWith(
+      color: AppColors.baseGrayColor,
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderSide: const BorderSide(
+        color: AppColors.baseGrayColor,
+        width: 1,
+      ),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: const BorderSide(
+        color: AppColors.primaryColor,
+        width: 1,
+      ),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderSide: const BorderSide(
+        color: AppColors.errorColor,
+        width: 1,
+      ),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderSide: const BorderSide(
+        color: AppColors.errorColor,
+        width: 1,
+      ),
+      borderRadius: BorderRadius.circular(8),
     ),
   ),
   pageTransitionsTheme: const PageTransitionsTheme(
