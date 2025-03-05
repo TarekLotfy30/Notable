@@ -47,7 +47,9 @@ Future<void> showSnackBar(
       action: action != null
           ? SnackBarAction(
               label: action,
-              onPressed: () => ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+              onPressed: () {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              },
             )
           : null,
     ),
@@ -82,7 +84,9 @@ Future<DateTime?> datePicker({
       //2024-03-03 => api
       //3/3/2024 => ui
       if (value != null) {
-        textEditingController?.text = convertUIDateToAPIFormat(DateFormat.yMd().format(value));
+        textEditingController?.text = convertUIDateToAPIFormat(
+          DateFormat.yMd().format(value),
+        );
       }
       return value;
     },

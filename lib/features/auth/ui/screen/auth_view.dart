@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/di/service_locator.dart';
 import '../../cubit/login_cubit.dart';
+import '../../data/repo/logni_repo_impl.dart';
 import 'login_view.dart';
 import 'register_view.dart';
 import 'social_media_view.dart';
@@ -39,7 +41,9 @@ class AuthView extends StatelessWidget {
                   child: TabBarView(
                     children: [
                       BlocProvider(
-                        create: (context) => LoginCubit(),
+                        create: (context) => LoginCubit(
+                          loginRepository: getIt.get<LoginRepoImpl>(),
+                        ),
                         child: const LoginView(),
                       ),
                       const RegisterView(),

@@ -15,6 +15,7 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<LoginCubit>();
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -43,21 +44,19 @@ class LoginView extends StatelessWidget {
                 children: [
                   // AppTextFormField with email controller
                   TextFormField(
-                    onTapOutside: (event) => FocusScope.of(context).unfocus(),
-                    controller: context.read<LoginCubit>().emailController,
+                    onTapOutside: (_) => FocusScope.of(context).unfocus(),
+                    controller: cubit.emailController,
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Email field is required.';
-                      }
-                      if (!AppRegex.isEmailValid(value)) {
+                      } else if (!AppRegex.isEmailValid(value)) {
                         return 'Please enter a valid email address';
                       }
                       return null;
                     },
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    textCapitalization: TextCapitalization.none,
+                    autovalidateMode: AutovalidateMode.onUnfocus,
                     maxLines: 1,
                     decoration: const InputDecoration(
                       labelText: 'Email',
@@ -67,10 +66,12 @@ class LoginView extends StatelessWidget {
                   ),
                   verticalSpacing(16),
                   BlocBuilder<LoginCubit, LoginState>(
+                    // Only rebuild when it's a ChangeIsObscure state
+                    buildWhen: (_, current) => current is ChangeIsObscure,
                     builder: (context, state) {
                       return TextFormField(
-                        onTapOutside: (event) => FocusScope.of(context).unfocus(),
-                        controller: context.read<LoginCubit>().passwordController,
+                        onTapOutside: (_) => FocusScope.of(context).unfocus(),
+                        controller: cubit.passwordController,
                         keyboardType: TextInputType.visiblePassword,
                         textInputAction: TextInputAction.done,
                         validator: (value) {
@@ -82,25 +83,22 @@ class LoginView extends StatelessWidget {
                           }
                           return null;
                         },
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        maxLines: 1,
-                        obscureText: context.read<LoginCubit>().isObscure,
+                        autovalidateMode: AutovalidateMode.onUnfocus,
+                        obscureText: cubit.isObscure,
                         decoration: InputDecoration(
                           labelText: 'Password',
                           hintText: '********',
                           suffixIcon: IconButton(
-                            onPressed: () {
-                              context.read<LoginCubit>().changeIsObscure();
-                            },
+                            onPressed: cubit.changeIsObscure,
                             icon: Visibility(
-                              visible: context.read<LoginCubit>().isObscure,
+                              visible: cubit.isObscure,
                               replacement: const Icon(
                                 Icons.visibility_off,
-                                color: AppColors.primaryColor,
+                                color: AppColors.darkGrayColor,
                               ),
                               child: const Icon(
                                 Icons.visibility,
-                                color: AppColors.primaryColor,
+                                color: AppColors.darkGrayColor,
                               ),
                             ),
                           ),
@@ -114,16 +112,13 @@ class LoginView extends StatelessWidget {
                     onPressed: () async {
                       // Validate and submit login form
                       // if validation passes then call login()
-                      if (context.read<LoginCubit>().loginFormKey.currentState!.validate()) {
-                        context.read<LoginCubit>().login();
+                      if (cubit.loginFormKey.currentState!.validate()) {
+                        cubit.login();
                       }
                     },
                     style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                           minimumSize: WidgetStateProperty.all(
-                            Size(
-                              192.w,
-                              56.h,
-                            ),
+                            Size(192.w, 56.h),
                           ),
                           shape: WidgetStatePropertyAll(
                             RoundedRectangleBorder(

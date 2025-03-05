@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'app_life_cycle_manager.dart';
 import 'core/routes/app_router.dart';
 import 'core/routes/app_routes_name.dart';
 import 'core/utils/themes/dark_theme.dart';
@@ -17,13 +18,16 @@ class NoteableApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(360, 780),
       minTextAdapt: true,
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        themeMode: ThemeMode.light,
-        onGenerateRoute: _appRouter.generateRoute,
-        initialRoute: AppRoutes.splash,
+      child: AppLifeCycleManager(
+        key: const Key('appLifeCycleManager'),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: ThemeMode.light,
+          onGenerateRoute: _appRouter.generateRoute,
+          initialRoute: AppRoutes.splash,
+        ),
       ),
     );
   }

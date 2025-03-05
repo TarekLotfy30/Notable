@@ -5,8 +5,8 @@ class SocialMediaView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [Text('Social Media View')],
+    return const Column(
+      children: [Text('Social Media View')],
     );
   }
 }

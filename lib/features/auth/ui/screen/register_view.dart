@@ -5,8 +5,8 @@ class RegisterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [Text('Register View')],
+    return const Column(
+      children: [Text('Register View')],
     );
   }
 }

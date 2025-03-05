@@ -4,7 +4,7 @@ class _SplashViewBody extends StatelessWidget {
   const _SplashViewBody();
 
   Future<String> _getNextScreen() async {
-    final skipOnBoarding = await SharedHelper.get(
+    final skipOnBoarding = await getIt<LocalHelper>().get(
           key: AppSharedKeys.skipOnBoarding.toString(),
         ) ??
         false;

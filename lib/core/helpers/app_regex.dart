@@ -6,8 +6,7 @@ class AppRegex {
   }
 
   static bool isPhoneValid(String phone) {
-    return RegExp(r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')
-        .hasMatch(phone);
+    return RegExp(r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$').hasMatch(phone);
   }
 
   static bool isUsernameValid(String username) {
@@ -16,55 +15,52 @@ class AppRegex {
 
   static bool isWebsiteValid(String website) {
     return RegExp(
-            r'^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$')
-        .hasMatch(website);
+      r'^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$',
+    ).hasMatch(website);
   }
 
   static bool isUrlValid(String url) {
     return RegExp(
-            r'^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$')
-        .hasMatch(url);
+      r'^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$',
+    ).hasMatch(url);
   }
 
   static bool isImageUrlValid(String imageUrl) {
     return RegExp(
-            r'^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$')
-        .hasMatch(imageUrl);
+      r'^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$',
+    ).hasMatch(imageUrl);
   }
 
   static bool isVideoUrlValid(String videoUrl) {
     return RegExp(
-            r'^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$')
-        .hasMatch(videoUrl);
+      r'^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$',
+    ).hasMatch(videoUrl);
   }
 
   static bool isFileUrlValid(String fileUrl) {
     return RegExp(
-            r'^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$')
-        .hasMatch(fileUrl);
+      r'^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$',
+    ).hasMatch(fileUrl);
   }
 
   static bool isEmailValid(String email) {
-    return RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
-        .hasMatch(email);
+    return RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$').hasMatch(email);
   }
 
   static bool isPasswordValid(String password) {
-    return RegExp(
-            r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$')
-        .hasMatch(password);
+    return RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$').hasMatch(password);
   }
 
   static bool hasLowerCase(String password) {
-    return RegExp(r'^(?=.*[a-z])').hasMatch(password);
+    return RegExp('^(?=.*[a-z])').hasMatch(password);
   }
 
   static bool hasUpperCase(String password) {
-    return RegExp(r'^(?=.*[A-Z])').hasMatch(password);
+    return RegExp('^(?=.*[A-Z])').hasMatch(password);
   }
 
   static bool hasNumber(String password) {
-    return RegExp(r'^(?=.*?[0-9])').hasMatch(password);
+    return RegExp('^(?=.*?[0-9])').hasMatch(password);
   }
 
   static bool hasSpecialCharacter(String password) {
@@ -72,7 +68,7 @@ class AppRegex {
   }
 
   static bool hasMinLength(String password) {
-    return RegExp(r'^(?=.{8,})').hasMatch(password);
+    return RegExp('^(?=.{8,})').hasMatch(password);
   }
 }
 
@@ -94,4 +90,3 @@ return 'Password must have:\n'
 }
 return null; // Validation passed
 },*/
-
