@@ -7,7 +7,7 @@ class _Button extends StatelessWidget {
   Future<void> _handleButtonPress(BuildContext context) async {
     if (context.read<OnboardingCubit>().isLast) {
       context.removeAllAndNavigateToNamedRoute(
-        AppRoutes.login,
+        AppRoutes.auth,
         predicate: (route) => false,
       );
       context.read<OnboardingCubit>().savedToSharedPref();

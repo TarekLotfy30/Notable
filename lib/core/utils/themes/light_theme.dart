@@ -16,11 +16,7 @@ ThemeData lightTheme = ThemeData(
   scaffoldBackgroundColor: AppColors.backgroundColor,
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 14,
-        vertical: 16,
-      ),
-      
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
       backgroundColor: AppColors.primaryColor,
       foregroundColor: Colors.white, // This controls the text color
       elevation: 0,
@@ -55,10 +51,7 @@ ThemeData lightTheme = ThemeData(
     isDense: true,
     filled: true,
     fillColor: AppColors.whiteColor,
-    contentPadding: const EdgeInsets.symmetric(
-      horizontal: 20,
-      vertical: 18,
-    ),
+    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
     hintStyle: AppTextStyles.textStyle16.copyWith(
       color: AppColors.baseGrayColor,
     ),

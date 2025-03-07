@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalHelper {
   LocalHelper(this.pref) {
-    debugPrint('SharedPreferences initialized successfully.');
+    debugPrint('✅SharedPreferences initialized successfully.');
   }
 
   final SharedPreferences pref;

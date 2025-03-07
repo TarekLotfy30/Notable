@@ -20,7 +20,7 @@ class AppRouter {
             child: const OnboardingView(),
           ),
         );
-      case AppRoutes.login:
+      case AppRoutes.auth:
         return _buildRoute(const AuthView());
       default:
         return _buildRoute(_wrongRoute());

@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../features/auth/data/repo/logni_repo_impl.dart';
+import '../../features/auth/data/repo/login_repo_impl.dart';
 import '../services/local/local_helper.dart';
 import '../services/network/dio_helper.dart';
 

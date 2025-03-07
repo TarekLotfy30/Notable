@@ -27,15 +27,8 @@ class DioHelper {
         return status! < 500;
       },
     );
-
-    // Debug print BaseOptions configuration
-    debugPrint('🔧 BaseOptions Configuration:');
-    debugPrint('Content Type: application/json');
-    debugPrint('Response Type: ResponseType.json');
-
     // Add interceptors
     addDioInterceptor();
-
     _dio.interceptors.add(
       LogInterceptor(
         requestBody: true,

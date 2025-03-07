@@ -10,7 +10,7 @@ class _SplashViewBody extends StatelessWidget {
         false;
     //final String? token = await LocalData.get(key: AppSharedKeys.token);
     if (skipOnBoarding) {
-      return AppRoutes.login;
+      return AppRoutes.auth;
       // if (token == null) {
       //   return const LoginScreen();
       // } else {

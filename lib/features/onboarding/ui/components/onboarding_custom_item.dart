@@ -1,5 +1,5 @@
-
 part of '../screen/onboarding_view.dart';
+
 class _OnboardingCustomItem extends StatelessWidget {
   const _OnboardingCustomItem({
     required this.onboarding,
@@ -7,28 +7,10 @@ class _OnboardingCustomItem extends StatelessWidget {
 
   final Onboarding onboarding;
 
-  Future<void> _handleSkip(BuildContext context) async {
-    context.read<OnboardingCubit>().savedToSharedPref();
-    context.removeAllAndNavigateToNamedRoute(
-      AppRoutes.login,
-      predicate: (route) {
-        return false;
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Align(
-          alignment: AlignmentDirectional.topEnd,
-          child: TextButton(
-            onPressed: () async => _handleSkip(context),
-            child: const Text('SKIP'),
-          ),
-        ),
-        verticalSpacing(15),
         Image.asset(
           onboarding.image,
           height: 300.h,

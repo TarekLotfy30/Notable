@@ -71,22 +71,3 @@ class AppRegex {
     return RegExp('^(?=.{8,})').hasMatch(password);
   }
 }
-
-
-
-
-/*
-validator: (value) {
-if (value == null || value.isEmpty) {
-return 'Password cannot be empty';
-}
-if (!AppRegex.isPasswordValid(value)) {
-return 'Password must have:\n'
-'- At least 8 characters\n'
-'- At least 1 uppercase letter\n'
-'- At least 1 lowercase letter\n'
-'- At least 1 number\n'
-'- At least 1 special character';
-}
-return null; // Validation passed
-},*/
