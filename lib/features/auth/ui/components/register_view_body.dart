@@ -1,16 +1,16 @@
-part of '../screen/register_view.dart';
+part of '../screens/register_view.dart';
 
-class _RegisterViewBody extends StatelessWidget {
-  const _RegisterViewBody();
+class RegisterViewBody extends StatelessWidget {
+  const RegisterViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+      physics: const BouncingScrollPhysics(),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
       child: Column(
         children: [
-          _BuildHeaderForAuth(
+          const BuildHeaderForAuth(
             image: AppImages.register,
             title: 'Register',
           ),

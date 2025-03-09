@@ -1,7 +1,9 @@
-part of '../screen/login_view.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class _AuthButton extends StatelessWidget {
-  const _AuthButton({
+class AuthButton extends StatelessWidget {
+  const AuthButton({
+    super.key,
     required this.onPressed,
     required this.title,
   });
