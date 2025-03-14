@@ -18,6 +18,9 @@ class ErrorMessages {
   static const Map<int, String> httpStatusMessages = {
     400: 'Bad Request',
     401: 'Unauthorized',
+    422: 'Unprocessable Entity',
+    402: 'Payment Required',
+    405: 'Method Not Allowed',
     403: 'Forbidden',
     404: 'Your request was not found, please try later!',
     500: 'Internal Server error, please try later',

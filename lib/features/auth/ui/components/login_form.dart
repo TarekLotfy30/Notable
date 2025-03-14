@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/helpers/functions.dart';
 import '../../../../core/utils/colors/app_colors.dart';
 import '../../../../core/utils/typography/app_text_styles.dart';
-import '../../cubit/login_cubit.dart';
+import '../../cubit/login_cubit/login_cubit.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({

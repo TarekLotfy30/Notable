@@ -1,45 +1,75 @@
+// abstract class Failure {
+//   const Failure(this.errorMessage);
+//
+//   final String errorMessage;
+// }
+import 'package:dio/dio.dart';
+
 abstract class Failure {
-  const Failure(this.errorMessage);
-  final String errorMessage;
+  const Failure(this.errMessage);
+
+  final String errMessage;
 }
 
-// Think of error handling like a customer service department in a store:
+class ServerFailure extends Failure {
+  ServerFailure(super.errMessage);
 
-// Base Failure (Customer Complaint): This is just a record that something 
-// went wrong with a message.
+  factory ServerFailure.fromDioError(DioException dioError) {
+    switch (dioError.type) {
+      case DioExceptionType.connectionTimeout:
+        return ServerFailure('Connection timeout with ApiServer');
 
+      case DioExceptionType.sendTimeout:
+        return ServerFailure('Send timeout with ApiServer');
 
-// ServerFailure (Online Shopping Complaint): A specific type of complaint 
-// that happens when shopping online.
+      case DioExceptionType.receiveTimeout:
+        return ServerFailure('Receive timeout with ApiServer');
 
+      case DioExceptionType.cancel:
+        return ServerFailure('Request to ApiServer was canceled');
 
-// DioErrorMapper (Customer Service Representative): This person's only job
-// is to take technical problems and translate them  into understandable 
-// messages for customers. They know all the types of technical issues 
-// that can happen.
+      case DioExceptionType.badResponse:
+        if (dioError.response != null) {
+          return ServerFailure.fromResponse(
+            dioError.response!.statusCode,
+            dioError.response!.data,
+          );
+        }
+        return ServerFailure('Response was null');
+      case DioExceptionType.unknown:
+        // if (dioError.message!.contains('SocketException')) {
+        //   return ServerFailure('No Internet Connection');
+        // }
+        return ServerFailure('Unexpected Error, Please try again!');
+      default:
+        return ServerFailure('Opps There was an Error, Please try again');
+    }
+  }
 
-
-// ErrorMessages (Company Policy Handbook): Contains all standard responses 
-// for different situations, so everyone gives consistent messages.
-
-// When something goes wrong with an online request:
-
-// The app encounters a problem (DioException)
-// It hands this problem to the specialist (DioErrorMapper)
-// The specialist consults the handbook (ErrorMessages)
-// They create the right type of complaint form (ServerFailure)
-// This form gets passed up to whoever needs to handle it
-
-
-  // Future<Result<T>> _handleApiCall<T>(Future<Response<dynamic>> Function()
-  // apiCall) async {
-  //   try {
-  //     final response = await apiCall();
-  //     return Result.success(response.data as T);
-  //   } on DioException catch (dioError) {
-  //     return Result.failure(ServerFailure.fromDioError(dioError));
-  //   } catch (e) {
-  //     return Result.failure(ServerFailure('Unexpected error: ${e.toString()}'
-  // ));
-  //   }
-  // }
+  factory ServerFailure.fromResponse(
+    int? statusCode,
+    Map<String, dynamic> response,
+  ) {
+    const statusBadRequest = 400;
+    const statusUnauthorized = 401;
+    const statusForbidden = 403;
+    const statusNotFound = 404;
+    const statusInternalServerError = 500;
+    switch (statusCode) {
+      case statusBadRequest:
+      case statusUnauthorized:
+      case statusForbidden:
+        // ignore: avoid_dynamic_calls
+        return ServerFailure(response['error']['message']);
+      case statusNotFound:
+        return ServerFailure('Your request not found, Please try later!');
+      case statusInternalServerError:
+        return ServerFailure('Internal Server error, Please try later');
+      default:
+        return ServerFailure(
+          'Unknown status code: $statusCode Opps There was an Error,'
+          ' Please try again',
+        );
+    }
+  }
+}

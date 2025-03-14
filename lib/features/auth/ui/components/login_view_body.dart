@@ -29,15 +29,33 @@ class _LoginViewBody extends StatelessWidget {
             ),
           ),
           verticalSpacing(15),
-          AuthButton(
-            onPressed: () async {
-              // Validate and submit login form
-              // if validation passes then call login()
-              if (cubit.loginFormKey.currentState!.validate()) {
-                cubit.login();
+          BlocListener<LoginCubit, LoginState>(
+            listener: (context, state) async {
+              if (state is LoginSuccess) {
+                context.removeAllAndNavigateToNamedRoute(
+                  AppRoutes.sharedHome,
+                  predicate: (route) => false,
+                );
+                showSuccessSnackBar(
+                  context,
+                  'Login Success',
+                );
+              }
+              else if (state is LoginFailure) {
+                showErrorSnackBar(
+                  context,
+                  state.errorMessage,
+                );
               }
             },
-            title: 'Log In',
+            child: AuthButton(
+              onPressed: () async {
+                if (cubit.loginFormKey.currentState!.validate()) {
+                  cubit.login();
+                }
+              },
+              title: 'Log In',
+            ),
           ),
         ],
       ),

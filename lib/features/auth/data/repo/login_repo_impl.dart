@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../core/errors/failure.dart';
 import '../../../../core/errors/server_failure.dart';
@@ -17,7 +18,6 @@ class LoginRepoImpl implements LoginRepository {
 
   final DioHelper dio;
   final LocalHelper local;
-
   @override
   Future<Either<Failure, void>> login({
     required String email,
@@ -31,19 +31,17 @@ class LoginRepoImpl implements LoginRepository {
           'password': password,
         },
       );
-
-      final token = response['data']['token'];
-
-      local.set(
+      await local.set(
         key: AppSharedKeys.token.toString(),
-        value: token,
+        value: response['data']['token'],
       );
-      return const Right(null); // Returns void on success
+
+      return const Right(null);
     } on Exception catch (error) {
       if (error is DioException) {
-        return left(ServerFailure.fromDioError(error));
+        return Left(ServerFailure.fromDioError(error));
       }
-      return left(ServerFailure(error.toString()));
+      return Left(ServerFailure(error.toString()));
     }
   }
 }

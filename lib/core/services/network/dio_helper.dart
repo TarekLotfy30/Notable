@@ -10,11 +10,6 @@ class DioHelper {
 
     const Duration timeOut = Duration(seconds: 20);
 
-    // Debug print timeout details
-    debugPrint('⏰ Timeout Configuration:');
-    debugPrint('Connect Timeout: $timeOut');
-    debugPrint('Receive Timeout: $timeOut');
-
     _dio.options = BaseOptions(
       baseUrl: EndPoints.baseUrl,
       receiveDataWhenStatusError: true,
@@ -27,18 +22,18 @@ class DioHelper {
         return status! < 500;
       },
     );
-    // Add interceptors
-    addDioInterceptor();
-    _dio.interceptors.add(
-      LogInterceptor(
-        requestBody: true,
-        responseBody: true,
-        error: true,
-        requestHeader: true,
-        responseHeader: true,
-        request: true,
-      ),
-    );
+
+   // addDioInterceptor();
+    // _dio.interceptors.add(
+    //   LogInterceptor(
+    //     requestBody: true,
+    //     responseBody: true,
+    //     error: true,
+    //     requestHeader: true,
+    //     responseHeader: true,
+    //     request: true,
+    //   ),
+    // );
 
     // Final debug print for initialization complete
     debugPrint('✅ DioHelper Initialization Complete');
@@ -46,39 +41,39 @@ class DioHelper {
 
   final Dio _dio;
 
-  void addDioInterceptor() {
-    _dio.interceptors.add(
-      InterceptorsWrapper(
-        onRequest: (options, handler) {
-          debugPrint('==================== REQUEST START ====================');
-          debugPrint('Request Method: ${options.method}');
-          debugPrint('Request URL: ${options.uri}');
-          debugPrint('Request Headers: ${options.headers}');
-          debugPrint('Request Data: ${options.data}');
-          debugPrint('Request Query Parameters: ${options.queryParameters}');
-          debugPrint('==================== REQUEST END ====================');
-          return handler.next(options);
-        },
-        onResponse: (response, handler) {
-          debugPrint('==================== RESPONSE START ===================');
-          debugPrint('Response Status Code: ${response.statusCode}');
-          debugPrint('Response Headers: ${response.headers}');
-          debugPrint('Response Data: ${response.data}');
-          debugPrint('==================== RESPONSE END ====================');
-          return handler.next(response);
-        },
-        onError: (e, handler) {
-          debugPrint('==================== ERROR START ====================');
-          debugPrint('DioException Type: ${e.type}');
-          debugPrint('DioException Message: ${e.message}');
-          debugPrint('Error Response: ${e.response}');
-          debugPrint('Error Request Options: ${e.requestOptions}');
-          debugPrint('==================== ERROR END ====================');
-          return handler.next(e);
-        },
-      ),
-    );
-  }
+  // void addDioInterceptor() {
+  //   _dio.interceptors.add(
+  //     InterceptorsWrapper(
+  //       onRequest: (options, handler) {
+  //         debugPrint('==================== REQUEST START ====================');
+  //         debugPrint('Request Method: ${options.method}');
+  //         debugPrint('Request URL: ${options.uri}');
+  //         debugPrint('Request Headers: ${options.headers}');
+  //         debugPrint('Request Data: ${options.data}');
+  //         debugPrint('Request Query Parameters: ${options.queryParameters}');
+  //         debugPrint('==================== REQUEST END ====================');
+  //         return handler.next(options);
+  //       },
+  //       onResponse: (response, handler) {
+  //         debugPrint('==================== RESPONSE START ===================');
+  //         debugPrint('Response Status Code: ${response.statusCode}');
+  //         debugPrint('Response Headers: ${response.headers}');
+  //         debugPrint('Response Data: ${response.data}');
+  //         debugPrint('==================== RESPONSE END ====================');
+  //         return handler.next(response);
+  //       },
+  //       onError: (e, handler) {
+  //         debugPrint('==================== ERROR START ====================');
+  //         debugPrint('DioException Type: ${e.type}');
+  //         debugPrint('DioException Message: ${e.message}');
+  //         debugPrint('Error Response: ${e.response}');
+  //         debugPrint('Error Request Options: ${e.requestOptions}');
+  //         debugPrint('==================== ERROR END ====================');
+  //         return handler.next(e);
+  //       },
+  //     ),
+  //   );
+  // }
 
   Future<Map<String, dynamic>> get({
     required String endPoint,
@@ -100,34 +95,24 @@ class DioHelper {
       options.headers?['Accept-Language'] = language;
     }
 
-    try {
-      debugPrint('==================== GET REQUEST START ====================');
-      debugPrint('Endpoint: $endPoint');
-      debugPrint('Params: $params');
-      debugPrint('Body: $body');
-      debugPrint('Headers: ${options.headers}');
+    debugPrint('==================== GET REQUEST START ====================');
+    debugPrint('Endpoint: $endPoint');
+    debugPrint('Params: $params');
+    debugPrint('Body: $body');
 
-      final response = await _dio.get(
-        endPoint,
-        queryParameters: params,
-        data: body,
-        options: options,
-      );
+    final response = await _dio.get(
+      endPoint,
+      queryParameters: params,
+      data: body,
+      options: options,
+    );
 
-      debugPrint('Request URL: ${response.requestOptions.uri}');
-      debugPrint('Response Status Code: ${response.statusCode}');
-      debugPrint('Response Data: ${response.data}');
-      debugPrint('==================== GET REQUEST END ====================');
+    debugPrint('Request URL: ${response.requestOptions.uri}');
+    debugPrint('Response Status Code: ${response.statusCode}');
+    debugPrint('Response Data: ${response.data}');
+    debugPrint('==================== GET REQUEST END ====================');
 
-      return response.data;
-    } on DioException catch (e) {
-      debugPrint('==================== GET REQUEST ERROR ====================');
-      debugPrint('DioException: ${e.message}');
-      debugPrint('Error Response: ${e.response}');
-      debugPrint('Error Type: ${e.type}');
-      debugPrint('================= GET REQUEST ERROR END ================');
-      rethrow;
-    }
+    return response.data;
   }
 
   Future<Map<String, dynamic>> post({
@@ -150,33 +135,23 @@ class DioHelper {
       options.headers?['Accept-Language'] = language;
     }
 
-    try {
-      debugPrint('==================== POST REQUEST START =================');
-      debugPrint('Endpoint: $endPoint');
-      debugPrint('Params: $params');
-      debugPrint('Body: $body');
-      debugPrint('Headers: ${options.headers}');
+    debugPrint('==================== POST REQUEST START =================');
+    debugPrint('Endpoint: $endPoint');
+    debugPrint('Params: $params');
+    debugPrint('Body: $body');
 
-      final response = await _dio.post(
-        endPoint,
-        queryParameters: params,
-        data: body,
-        options: options,
-      );
+    final response = await _dio.post(
+      endPoint,
+      queryParameters: params,
+      data: body,
+      options: options,
+    );
 
-      debugPrint('Request URL: ${response.requestOptions.uri}');
-      debugPrint('Response Status Code: ${response.statusCode}');
-      debugPrint('Response Data: ${response.data}');
-      debugPrint('==================== POST REQUEST END ====================');
+    debugPrint('Request URL: ${response.requestOptions.uri}');
+    debugPrint('Response Status Code: ${response.statusCode}');
+    debugPrint('Response Data: ${response.data}');
+    debugPrint('==================== POST REQUEST END ====================');
 
-      return response.data;
-    } on DioException catch (e) {
-      debugPrint('==================== POST REQUEST ERROR ==================');
-      debugPrint('DioException: ${e.message}');
-      debugPrint('Error Response: ${e.response}');
-      debugPrint('Error Type: ${e.type}');
-      debugPrint('================= POST REQUEST ERROR END ==============');
-      rethrow;
-    }
+    return response.data;
   }
 }

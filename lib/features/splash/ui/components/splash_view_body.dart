@@ -1,24 +1,28 @@
+// splash_view_body.dart
 part of '../screens/splash_view.dart';
 
 class _SplashViewBody extends StatelessWidget {
   const _SplashViewBody();
 
-  Future<String> _getNextScreen() async {
-    final skipOnBoarding = await getIt<LocalHelper>().get(
+  // Logic to decide the next screen has been moved to a dedicated method
+  // for separation of concerns
+  Future<String> _determineNextScreen() async {
+    final localHelper = getIt<LocalHelper>();
+
+    final skipOnBoarding = await localHelper.get(
           key: AppSharedKeys.skipOnBoarding.toString(),
         ) ??
         false;
-    //final String? token = await LocalData.get(key: AppSharedKeys.token);
+
+    final token = await localHelper.get(
+      key: AppSharedKeys.token.toString(),
+    );
+
+    // Use ternary operator for better readability
     if (skipOnBoarding) {
-      return AppRoutes.auth;
-      // if (token == null) {
-      //   return const LoginScreen();
-      // } else {
-      //   return const SharedHome();
-      // }
-    } else {
-      return AppRoutes.onboarding;
+      return token == null ? AppRoutes.auth : AppRoutes.sharedHome;
     }
+    return AppRoutes.onboarding;
   }
 
   @override
@@ -37,13 +41,19 @@ class _SplashViewBody extends StatelessWidget {
         totalRepeatCount: 1,
         displayFullTextOnTap: true,
         onFinished: () async {
-          final nextScreen = await _getNextScreen();
-          context.removeAllAndNavigateToNamedRoute(
-            nextScreen,
-            predicate: (route) => false,
-          );
+          // Navigate to the next screen after animation finishes
+          final nextScreen = await _determineNextScreen();
+          _navigateToNextScreen(context, nextScreen);
         },
       ),
+    );
+  }
+
+  // Dedicated method for navigation to improve clarity and avoid duplication
+  Future<void> _navigateToNextScreen(BuildContext context, String route) async {
+    context.removeAllAndNavigateToNamedRoute(
+      route,
+      predicate: (route) => false,
     );
   }
 }

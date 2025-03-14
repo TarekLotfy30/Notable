@@ -1,7 +1,7 @@
 part of '../screens/register_view.dart';
 
-class RegisterViewBody extends StatelessWidget {
-  const RegisterViewBody({super.key});
+class _RegisterViewBody extends StatelessWidget {
+  const _RegisterViewBody();
 
   @override
   Widget build(BuildContext context) {
