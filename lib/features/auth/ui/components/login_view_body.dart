@@ -40,11 +40,10 @@ class _LoginViewBody extends StatelessWidget {
                   context,
                   'Login Success',
                 );
-              }
-              else if (state is LoginFailure) {
+              } else if (state is LoginFailure) {
                 showErrorSnackBar(
                   context,
-                  state.errorMessage,
+                  state.message,
                 );
               }
             },

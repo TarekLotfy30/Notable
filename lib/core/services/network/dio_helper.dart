@@ -23,7 +23,7 @@ class DioHelper {
       },
     );
 
-   // addDioInterceptor();
+    // addDioInterceptor();
     // _dio.interceptors.add(
     //   LogInterceptor(
     //     requestBody: true,
@@ -115,7 +115,7 @@ class DioHelper {
     return response.data;
   }
 
-  Future<Map<String, dynamic>> post({
+  Future<Response> post({
     required String endPoint,
     Map<String, dynamic>? params,
     Map<String, dynamic>? body,
@@ -152,6 +152,6 @@ class DioHelper {
     debugPrint('Response Data: ${response.data}');
     debugPrint('==================== POST REQUEST END ====================');
 
-    return response.data;
+    return response;
   }
 }

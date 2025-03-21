@@ -3,11 +3,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/errors/failure.dart';
-import '../../../../core/errors/server_failure.dart';
 import '../../../../core/services/local/local_helper.dart';
 import '../../../../core/services/local/shared_keys.dart';
 import '../../../../core/services/network/dio_helper.dart';
 import '../../../../core/services/network/endpoints.dart';
+import '../models/login_response.dart';
 import 'login_repo.dart';
 
 class LoginRepoImpl implements LoginRepository {
@@ -19,7 +19,7 @@ class LoginRepoImpl implements LoginRepository {
   final DioHelper dio;
   final LocalHelper local;
   @override
-  Future<Either<Failure, void>> login({
+  Future<Either<Failure, LoginResponse>> login({
     required String email,
     required String password,
   }) async {
@@ -31,17 +31,28 @@ class LoginRepoImpl implements LoginRepository {
           'password': password,
         },
       );
+      final loginResponse = LoginResponse.fromJson(response.data);
+      // Check status before processing
+      if (response.statusCode != 200) {
+        throw DioException(requestOptions: response.requestOptions);
+      }
+      // Validate response structure
+      if (response.data == null) {
+        return const Left(Failure('Invalid response format from server'));
+      }
+      
       await local.set(
         key: AppSharedKeys.token.toString(),
-        value: response['data']['token'],
+        value: loginResponse.data?.token,
       );
-
-      return const Right(null);
-    } on Exception catch (error) {
-      if (error is DioException) {
-        return Left(ServerFailure.fromDioError(error));
-      }
-      return Left(ServerFailure(error.toString()));
+      return Right(response.data);
+    } on DioException catch (e) {
+      debugPrint("DioException: ${e.toString()}");
+      debugPrint("DioException: ${e.response?.data}");
+      debugPrint("DioException: ${e.type}");
+      return Left(Failure.fromDioError(e));
+    } on Failure catch (_) {
+      rethrow;
     }
   }
 }

@@ -20,8 +20,11 @@ class ErrorMessages {
     401: 'Unauthorized',
     422: 'Unprocessable Entity',
     402: 'Payment Required',
-    405: 'Method Not Allowed',
     403: 'Forbidden',
+    405: 'Method Not Allowed',
+    406: 'Not Acceptable',
+    409: 'Conflict',
+    410: 'Gone',
     404: 'Your request was not found, please try later!',
     500: 'Internal Server error, please try later',
   };

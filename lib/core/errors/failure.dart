@@ -1,75 +1,44 @@
-// abstract class Failure {
-//   const Failure(this.errorMessage);
-//
-//   final String errorMessage;
-// }
 import 'package:dio/dio.dart';
 
-abstract class Failure {
-  const Failure(this.errMessage);
+import 'error_messages.dart';
 
-  final String errMessage;
-}
+class Failure implements Exception {
+  const Failure(this.errorMessage);
 
-class ServerFailure extends Failure {
-  ServerFailure(super.errMessage);
+  factory Failure.handleBadResponse(DioException exception) {
+    if (exception.response == null) {
+      return const Failure(ErrorMessages.nullResponse);
+    }
 
-  factory ServerFailure.fromDioError(DioException dioError) {
-    switch (dioError.type) {
+    final statusCode = exception.response!.statusCode;
+    if (ErrorMessages.httpStatusMessages.containsKey(statusCode)) {
+      return Failure(ErrorMessages.httpStatusMessages[statusCode]!);
+    }
+    return Failure(
+      'Unknown status code: $statusCode. ${ErrorMessages.genericError}',
+    );
+  }
+
+  factory Failure.fromDioError(DioException exception) {
+    switch (exception.type) {
       case DioExceptionType.connectionTimeout:
-        return ServerFailure('Connection timeout with ApiServer');
-
+        return const Failure(ErrorMessages.connectionTimeout);
       case DioExceptionType.sendTimeout:
-        return ServerFailure('Send timeout with ApiServer');
-
+        return const Failure(ErrorMessages.sendTimeout);
       case DioExceptionType.receiveTimeout:
-        return ServerFailure('Receive timeout with ApiServer');
-
+        return const Failure(ErrorMessages.receiveTimeout);
       case DioExceptionType.cancel:
-        return ServerFailure('Request to ApiServer was canceled');
-
+        return const Failure(ErrorMessages.requestCancelled);
       case DioExceptionType.badResponse:
-        if (dioError.response != null) {
-          return ServerFailure.fromResponse(
-            dioError.response!.statusCode,
-            dioError.response!.data,
-          );
-        }
-        return ServerFailure('Response was null');
+        return Failure.handleBadResponse(exception);
       case DioExceptionType.unknown:
-        // if (dioError.message!.contains('SocketException')) {
-        //   return ServerFailure('No Internet Connection');
-        // }
-        return ServerFailure('Unexpected Error, Please try again!');
+        if (exception.message?.contains('SocketException') ?? false) {
+          return const Failure(ErrorMessages.noInternet);
+        }
+        return const Failure(ErrorMessages.unexpectedError);
       default:
-        return ServerFailure('Opps There was an Error, Please try again');
+        return Failure.handleBadResponse(exception);
     }
   }
-
-  factory ServerFailure.fromResponse(
-    int? statusCode,
-    Map<String, dynamic> response,
-  ) {
-    const statusBadRequest = 400;
-    const statusUnauthorized = 401;
-    const statusForbidden = 403;
-    const statusNotFound = 404;
-    const statusInternalServerError = 500;
-    switch (statusCode) {
-      case statusBadRequest:
-      case statusUnauthorized:
-      case statusForbidden:
-        // ignore: avoid_dynamic_calls
-        return ServerFailure(response['error']['message']);
-      case statusNotFound:
-        return ServerFailure('Your request not found, Please try later!');
-      case statusInternalServerError:
-        return ServerFailure('Internal Server error, Please try later');
-      default:
-        return ServerFailure(
-          'Unknown status code: $statusCode Opps There was an Error,'
-          ' Please try again',
-        );
-    }
-  }
+  final String errorMessage;
 }

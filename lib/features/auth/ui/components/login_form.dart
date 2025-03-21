@@ -37,7 +37,7 @@ class LoginForm extends StatelessWidget {
           verticalSpacing(16),
           BlocBuilder<LoginCubit, LoginState>(
             // Only rebuild when it's a ChangeIsObscure state
-            buildWhen: (_, current) => current is ChangeIsObscure,
+            buildWhen: (_, current) => current is PasswordVisibilityChanged,
             builder: (context, state) {
               return TextFormField(
                 onTapOutside: (_) => FocusScope.of(context).unfocus(),
@@ -51,7 +51,7 @@ class LoginForm extends StatelessWidget {
                   labelText: 'Password',
                   hintText: '********',
                   suffixIcon: IconButton(
-                    onPressed: cubit.changeIsObscure,
+                    onPressed: cubit.togglePasswordVisibility,
                     icon: Visibility(
                       visible: cubit.isObscure,
                       replacement: const Icon(
